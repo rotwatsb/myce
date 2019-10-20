@@ -1,6 +1,0 @@
-setup.py
-myce/__init__.py
-myce.egg-info/PKG-INFO
-myce.egg-info/SOURCES.txt
-myce.egg-info/dependency_links.txt
-myce.egg-info/top_level.txt
