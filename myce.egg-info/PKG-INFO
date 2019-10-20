@@ -1,0 +1,10 @@
+Metadata-Version: 1.2
+Name: myce
+Version: 0.0.1
+Summary: API definitions and client
+Home-page: git://github.com:rotwatsb/myce.git
+Author: Steve Bradley
+License: unlicensed
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.6
