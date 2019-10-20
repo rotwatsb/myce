@@ -46,8 +46,8 @@ class APIClient(APIClientNode):
                 
         def f(**kwargs):
             interpolated_uri = 'http://' + base_uri + interpolatePath(resource.path, kwargs)
-            method = getattr(requests, resource.method)
-            method(interpolated_uri)
+            http_method = getattr(requests, resource.method)
+            http_method(interpolated_uri)
 
         return f
 
