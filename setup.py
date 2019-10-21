@@ -1,34 +1,21 @@
 import setuptools
+import setupextras
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+packages = setupextras.get_packages()
+requirements = setupextras.get_requirements()
+readme = setupextras.get_readme()
 
 setuptools.setup(
     name="myce",
     version="0.0.1",
-    author="Steve Bradly",
+    author="Steve Bradley",
     author_email="stevebradley@gmail.com",
     description="API definitions and client",
-    long_description=long_description,
+    long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/rotwatsb/myce",
-    packages=setuptools.find_packages(),
-    install_requires=[
-        "attrs",
-        "certifi",
-        "chardet",
-        "click",
-        "idna",
-        "jsonref",
-        "markdown2",
-        "pyyaml",
-        "ramlfications",
-        "requests",
-        "six",
-        "termcolor",
-        "urllib3",
-        "xmltodict",
-    ],
+    packages=packages,
+    install_requires=requirements,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

@@ -32,7 +32,7 @@ types:
             weight: integer
     component:
         type: string
-        enum: [ BTCWRAPP ]
+        enum: [ btcwrapp ]
 
 annotationTypes:
     implementer:
@@ -45,7 +45,7 @@ annotationTypes:
 /blockchain:
     get:
         (client_name): blockchain.get_info
-        (implementer): BTCWRAPP
+        (implementer): btcwrapp
         description: Get summary information about the blockchain
         responses:
             200:
@@ -108,7 +108,7 @@ annotationTypes:
 /block:
     get:
         (client_name): block.get_best_block
-        (implementer): BTCWRAPP
+        (implementer): btcwrapp
         description: Get summary information for the best (most recent) block
         responses:
             200:
@@ -117,7 +117,7 @@ annotationTypes:
     /{hash}:
         get:
             (client_name): block.get
-            (implementer): BTCWRAPP
+            (implementer): btcwrapp
             description: Get summary informaiton about a particular block
             responses:
                 200:

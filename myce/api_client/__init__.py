@@ -1,14 +1,11 @@
 import os
 import ramlfications
 import requests
+from config2.config import config
 
 def create():
     api = ramlfications.parse(os.path.dirname(__file__) + "/../raml/myce.raml")
     return APIClient(api)
-
-domain_map = {
-    'BTCWRAPP': 'btcwrapp.private-peanuts.net:8000'
-}
 
 class APIClientNode():
     def  __init__(self):
@@ -35,21 +32,28 @@ class APIClient(APIClientNode):
             setattr(client_node, node_path[-1], resource_function)
 
     def __build_resource_function(self, resource):
-        base_uri = domain_map[resource.raw.get('get').get('(implementer)')]
+        implementer = resource.raw.get('get').get('(implementer)')
+        base_uri = '%s:%s'%(config[implementer]['domain'], config[implementer]['port'])
         uri_params = resource.uri_params
 
         def interpolatePath(path, params):
-            for uri_param in uri_params:
-                path = path.replace('{%s}' %uri_param.name, params[uri_param.name])
+            if uri_params is not None:
+                for uri_param in uri_params:
+                    path = path.replace('{%s}' %uri_param.name, params[uri_param.name])
 
             return path
                 
         def f(**kwargs):
             interpolated_uri = 'http://' + base_uri + interpolatePath(resource.path, kwargs)
             http_method = getattr(requests, resource.method)
-            http_method(interpolated_uri)
+            
+            return http_method(interpolated_uri)
 
         return f
 
 
     
+
+
+
+
