@@ -3,7 +3,7 @@ import ramlfications
 import requests
 
 def create():
-    api = ramlfications.parse(os.getcwd() + "/raml/myce.raml")
+    api = ramlfications.parse(os.path.dirname(__file__) + "/../raml/myce.raml")
     return APIClient(api)
 
 domain_map = {
