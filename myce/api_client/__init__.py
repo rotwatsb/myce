@@ -33,7 +33,7 @@ class APIClient(APIClientNode):
 
     def __build_resource_function(self, resource):
         implementer = resource.raw[resource.method]['(implementer)']
-        base_uri = '%s:%s'%(config[implementer]['domain'], config[implementer]['port'])
+        base_uri = '%s:%s'%(config['myce'][implementer]['domain'], config['myce'][implementer]['port'])
         uri_params = resource.uri_params
 
         # as a side effect, this function removes uri params from the params object
