@@ -8,31 +8,9 @@ types:
     hash64:
         type: string
         pattern: "[a-zA-Z0-9]{64}"
-    block:
-        type: object
-        properties:
-            bits: string
-            chainwork: hash64
-            confirmations: integer
-            difficulty: number
-            hash: hash64
-            height: integer
-            mediantime: integer
-            merkleroot: hash64
-            nTx: integer
-            nextblockhash: hash64
-            nonce: integer
-            previousblockhash: hash64
-            size: integer
-            strippedsize: integer
-            time: integer
-            tx: string[]
-            version: integrer
-            versionHex: string
-            weight: integer
-    component:
-        type: string
-        enum: [ btcwrapp ]
+    block: !include types/block.raml
+    component: !include types/component.raml
+    user: !include types/user.raml
 
 annotationTypes:
     implementer:
@@ -51,60 +29,6 @@ annotationTypes:
             200:
                 body:
                     application/json:
-                        example: |
-                            {
-                                "automatic_pruning": True,
-                                "bestblockhash": "00000000000000001d1624fac50797fc10ae7c6b73722a78bee0719c3bde3d58",
-                                "bip9_softforks": {
-                                    "csv": {
-                                        "since": 0,
-                                        "startTime": 1462060800,
-                                        "status": "defined",
-                                        "timeout": 1493596800
-                                    },
-                                    "segwit": {
-                                        "since": 0,
-                                        "startTime": 1479168000,
-                                        "status": "defined",
-                                        "timeout": 1510704000
-                                    }
-                                },
-                                "blocks": 292499,
-                                "chain": "main",
-                                "chainwork": "000000000000000000000000000000000000000000002e386bc4bed7a1496fcc",
-                                "difficulty": 5006860589.2054,
-                                "headers": 599353,
-                                "initialblockdownload": True,
-                                "mediantime": 1395801675,
-                                "prune_target_size": 577765376,
-                                "pruned": True,
-                                "pruneheight": 290349,
-                                "size_on_disk": 561610402,
-                                "softforks": [
-                                    {
-                                        "id": "bip34",
-                                        "reject": {
-                                            "status": True
-                                        },
-                                        "version": 2
-                                    },
-                                    {
-                                        "id": "bip66",
-                                        "reject": {
-                                            "status": False
-                                        },
-                                        "version": 3
-                                    },
-                                    {
-                                        "id": "bip65",
-                                        "reject": {
-                                            "status": False
-                                        },
-                                        "version": 4
-                                    }
-                                ],
-                                "verificationprogress": 0.0841990025436426, "warnings": ""
-                            }
 /block:
     get:
         (client_name): block.get_best_block
@@ -123,3 +47,20 @@ annotationTypes:
                 200:
                     application/json:
                         type: block
+/user:
+    post:
+        (client_name): user.create
+        (implementer): dirt
+        description: Create a new user
+        body:
+            application/json:
+                type: user
+    /{user_id}:
+        get:
+            (client_name): user.get
+            (implementer): dirt
+            description: Retrieve a user
+            responses:
+                200:
+                    application/json:
+                        type: user
