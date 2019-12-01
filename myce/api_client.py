@@ -49,9 +49,9 @@ class APIClient(APIClientNode):
             interpolated_uri = 'http://' + base_uri + interpolatePath(resource.path, kwargs)
             http_method = getattr(requests, resource.method)
 
-            if http_method is 'get':
+            if resource.method is 'get':
                 return http_method(interpolated_uri)
-            elif http_method is 'post':
+            elif resource.method is 'post':
                 return http_method(interpolated_uri, json=kwargs)
 
         return f
