@@ -4,7 +4,7 @@ import requests
 from config2.config import config
 
 def create():
-    api = ramlfications.parse(os.path.dirname(__file__) + "/../raml/myce.raml")
+    api = ramlfications.parse(os.path.dirname(__file__) + "/raml/myce.raml")
     return APIClient(api)
 
 class APIClientNode():
@@ -22,7 +22,7 @@ class APIClientNode():
 class APIClient(APIClientNode):
     def __init__(self, api):
         self.__build_client(api)
-        
+
     def __build_client(self, api):
         for resource in api.resources:
             node_path = resource.raw[resource.method]['(client_name)'].split('.')
@@ -44,7 +44,7 @@ class APIClient(APIClientNode):
                     del params[uri_param.name]
 
             return path
-                
+
         def f(**kwargs):
             interpolated_uri = 'http://' + base_uri + interpolatePath(resource.path, kwargs)
             http_method = getattr(requests, resource.method)
