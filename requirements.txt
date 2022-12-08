@@ -1,7 +1,7 @@
 attributedict==0.3.0
 attrs==19.3.0
 blessings==1.7
-certifi==2019.9.11
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 codecov==2.0.15
